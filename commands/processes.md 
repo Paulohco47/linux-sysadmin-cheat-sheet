@@ -1,0 +1,74 @@
+#########################################################################################
+📂 Navegação e Listagem
+#########################################################################################
+pwd                  # Mostra o diretório atual
+ls -lath             # Lista arquivos detalhado (tamanho, data, ocultos)
+tree -L 2            # Mostra estrutura de pastas (2 níveis de profundidade)
+stat arquivo.txt     # Exibe metadados (permissões, dono, timestamps)
+
+#########################################################################################
+🔍 - Busca e Localização
+#########################################################################################
+
+
+find /var/log -name "*.log" -mtime +30  # Arquivos *.log com +30 dias
+locate nginx.conf                       # Busca rápida (requer updatedb)
+grep -r "ERROR" /var/log/               # Busca recursiva por texto
+fd "*.yml"                              # Alternativa moderna ao find (mais rápido)
+
+#########################################################################################
+📁 Manipulação de Arquivos
+#########################################################################################
+
+cp -av pasta/ destino/          # Cópia recursiva preservando atributos
+mv --backup=numbered antigo novo # Move com backup numerado se existir
+rm -i arquivo                   # Remove com confirmação
+shred -u -z arquivo.conf        # Apaga seguramente (sobresscreve + deleta)
+
+#########################################################################################
+📦 Compactação
+#########################################################################################
+
+tar -czvf backup.tar.gz /pasta/      # Cria tarball compactado
+unzip arquivo.zip -d destino/        # Extrai ZIP
+zstd -9 arquivo.log                  # Compacta com Zstd (alta eficiência)
+rsync -avzh origem/ user@destino:/   # Sincronização inteligente
+
+#########################################################################################
+🔒 Permissões e Atributos
+#########################################################################################
+
+chmod 750 script.sh           # rwxr-x--- (dono: 7, grupo: 5, outros: 0)
+chown deploy:www-data *        # Altera dono e grupo
+chattr +i /etc/nginx/nginx.conf # Torna arquivo imutável (contra alterações acidentais)
+getfacl /pasta/                # Verifica ACLs avançadas
+
+#########################################################################################
+💾 Discos e Partições
+#########################################################################################
+
+lsblk -f                     # Lista dispositivos de bloco (com FS)
+mount -t ext4 /dev/sdb1 /mnt # Monta partição manualmente
+umount -l /mnt               # Desmonta forçadamente se busy
+ncdu /var                    # Analisador interativo de uso de disco
+
+#########################################################################################
+📝 Edição e Visualização
+#########################################################################################
+
+less +F /var/log/syslog      # Monitora log em tempo real (Ctrl+C para sair)
+tail -n 100 -f app.log       # Mostra últimas 100 linhas + segue novas
+vimdiff arquivo1.conf arquivo2.conf  # Comparação visual no Vim
+bat /etc/nginx/nginx.conf    # Cat moderno (com syntax highlight)
+
+#########################################################################################
+🚨 Troubleshooting
+#########################################################################################
+
+lsof +D /tmp                 # Lista arquivos abertos no diretório
+strace -f -e trace=file php script.php  # Monitora acesso a arquivos
+df -i                        # Verifica inodes livres (caso "Disco cheio" mesmo com espaço)
+file /bin/bash               # Identifica tipo de arquivo (ELF, script, etc)
+
+
+
